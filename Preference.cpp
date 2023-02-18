@@ -62,7 +62,17 @@ ProgrammerSorter::ProgrammerSorter(std::string fileName, int nod, int nof) : num
     }
 
 }
-
+ProgrammerSorter::~ProgrammerSorter()
+{
+    for (auto x : departments)
+    {
+        delete x;
+    }
+    for (auto x : programmers)
+    {
+        delete x;
+    }
+}
 void ProgrammerSorter::addDepartment()
 {
     departments.push_back(new Preference());
@@ -99,6 +109,14 @@ void ProgrammerSorter::sort()
 {
     bool departmentsUsed[numOfDepartments];
     bool programmersUsed[numOfProgrammers];
+    for (int i = 0; i < numOfDepartments; i++)
+    {
+        departmentsUsed[i] = false;
+    }
+    for (int i = 0; i < numOfProgrammers; i++)
+    {
+        programmersUsed[i] = false;
+    }
     while (!arrayNotEmpty(departmentsUsed, numOfDepartments) && !arrayNotEmpty(programmersUsed, numOfProgrammers))
     {
         for (int dIndex = 1; dIndex <= numOfDepartments; dIndex++)
@@ -124,7 +142,7 @@ void ProgrammerSorter::sort()
                 else if (demand == 1 && !departmentsUsed[dIndex - 1] && !programmersUsed[programmer - 1])
                 {
                     bool higherPref = false;
-                    for (int i = 0; i < iIndex; i++)
+                    for (int i = 1; i < iIndex; i++)
                     {
                         higherPref = higherPref | this->demand(i, programmer, departmentsUsed);
                     }

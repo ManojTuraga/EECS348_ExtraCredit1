@@ -34,7 +34,7 @@ class ProgrammerSorter
 
     public:
         ProgrammerSorter(std::string fileName, int nod, int nof);
-        ~ProgrammerSorter() = default;
+        ~ProgrammerSorter();
 
         Preference& getDepartment(int departmentNumber);
         Preference& getProgrammer(int programmerNumber);
